@@ -2,9 +2,10 @@ var currentElpsId = null;
 var expandRate = 25;
 
 function setup() { 
+  console.log("in setup");
   createCanvas(1100, 500);
   ankara = loadImage("ankara_p5.jpg");
-  loadAllSculptureImages();
+  //loadAllSculptureImages();
 }
 
 function draw() {
