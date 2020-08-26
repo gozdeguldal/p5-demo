@@ -1,12 +1,9 @@
 class Sculpture {
-  constructor(id, x, y, name, sculptor, info, year, img) {
+  constructor(id, x, y, txt, img) {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.name = name;
-    this.sculptor = sculptor;
-    this.info = info;
-    this.year = year;
+    this.txt = txt;
     this.image = img;
     this.ellipseWidth = null;
     this.isExpanded = false;
