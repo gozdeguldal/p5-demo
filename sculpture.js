@@ -51,7 +51,7 @@ class Sculpture {
   }
 
   showSculptureInfo() {
-    if (this.isMouseOnTheSculpture() && mouseIsPressed) {
+    if (this.isMouseOnTheSculpture() && mouseIsPressed && currentElpsId === null) {
       currentElpsId = this.id; // bu nesnenin id'sini currentElpsId global değişkenine ata
     }
 

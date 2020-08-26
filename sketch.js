@@ -28,16 +28,13 @@ function mousePressed() {
 }
 
 function sculptureDrawer() {
-
   if (currentElpsId === null) {
     drawEllipses(sculptureArray);
   } else {
-
     let currentSculpture = getCurrentSculpture();
     let tempArrayWithoutCurSclp = sculptureArray.filter(function(sculpture) {
       return sculpture.id != currentElpsId;
     });
-
     drawEllipses(tempArrayWithoutCurSclp);
     drawSingleEllipse(currentSculpture, true);
   }
@@ -55,7 +52,6 @@ function drawSingleEllipse(sculpture, isCurrentEllipse) {
   } else {
     sculpture.resetExpand();
   }
-
   sculpture.showSculptureInfo();
   sculpture.showInitialPoint();
 }
