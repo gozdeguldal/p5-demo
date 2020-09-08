@@ -15,11 +15,10 @@ class Sculpture {
     if (d < 6) return true;
     return false;
   }
-
+  
   isMouseOnTheExpandedSculpture() {
     if (this.id === currentElpsId) {
       var d2 = dist(this.x, this.y, mouseX, mouseY);
-      console.log("current dist: " + d2);
       if (d2 < 100) return true;
       return false;
     }
@@ -42,11 +41,13 @@ class Sculpture {
   }
 
   expandForMoreInfo(expandRate) {
-    if (this.ellipseWidth + expandRate >= 1000) {
-      this.ellipseWidth = 1000;
+    if (this.id === currentElpsId) {
+      if (this.ellipseWidth + expandRate >= 600) {
+      this.ellipseWidth = 600;
       this.isExpandedForMoreInfo = true;
     } else {
       this.ellipseWidth += expandRate;
+    }
     }
   }
 
@@ -54,18 +55,23 @@ class Sculpture {
     if (this.isMouseOnTheSculpture() && mouseIsPressed && currentElpsId === null) {
       currentElpsId = this.id; // bu nesnenin id'sini currentElpsId global değişkenine ata
     }
-
     if (this.isExpanded) {
       image(this.image, this.x, this.y, 200, 200);
+      fill(255)
+      rect(this.x-110, this.y + 110,220,50);
       textSize(14);
-      fill(255);
+      fill(0);
       noStroke();
-      text(this.txt, this.x + 50, this.y + 100);
+      text(this.txt, this.x-100, this.y + 140);
+    }
+    if (this.isExpandedForMoreInfo) {
+      rect(this.image, this.x, this.y, 600, 600);
     }
   }
 
   resetExpand() {
-    this.ellipseWidth = 8;
+    this.ellipseWidth = 10;
     this.isExpanded = false;
+    this.isExpandedForMoreInfo = false
   }
 }

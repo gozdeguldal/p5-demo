@@ -15,13 +15,14 @@ function draw() {
 
 function mousePressed() {
   let isAnyOfTheExpandedSculpturesInsideClickedOn = false
-
   for (let i = 0; i < sculptureArray.length; i++) {
     if(sculptureArray[i].isMouseOnTheExpandedSculpture()){
       isAnyOfTheExpandedSculpturesInsideClickedOn = true;
     }
   }
-
+  if(isAnyOfTheExpandedSculpturesInsideClickedOn){
+   //buraya ne yazacaksın?
+  }
   if(!isAnyOfTheExpandedSculpturesInsideClickedOn){
     closeCurrentExpand();
   }
@@ -49,6 +50,7 @@ function getCurrentSculpture(){
 function drawSingleEllipse(sculpture, isCurrentEllipse) {
   if (isCurrentEllipse) {
     sculpture.graduallyExpand(expandRate);
+    sculpture.expandForMoreInfo(expandRate);
   } else {
     sculpture.resetExpand();
   }
@@ -65,19 +67,6 @@ function drawEllipses(arrayOfSculptures) {
 function closeCurrentExpand() {
   if (currentElpsId !== null) {
     getCurrentSculpture().resetExpand();
-    currentElpsId = null;
+    return currentElpsId = null;
   }
-}
-
-function moreInfo (){
-  if(isAnyOfTheExpandedSculpturesInsideClickedOn){
-    sculpture.expandMoreInfo ();
-  }
-}
-
-function isMouseOnTheCurrentExpandedSculpture(){
-    let currentSculpture = getCurrentSculpture();
-    var d2 = dist(currentSculpture.x, currentSculpture.y, mouseX, mouseY);
-    if (d2 < 100) return true;
-    return false;
 }
