@@ -2,10 +2,9 @@ var currentElpsId = null;
 var expandRate = 25;
 
 function setup() { 
-  console.log("in setup");
   createCanvas(1100, 500);
   ankara = loadImage("ankara_p5.jpg");
-  loadAllSculptureImages();
+  loadAllSculptureImages(); 
 }
 
 function draw() {
@@ -79,6 +78,6 @@ function moreInfo (){
 function isMouseOnTheCurrentExpandedSculpture(){
     let currentSculpture = getCurrentSculpture();
     var d2 = dist(currentSculpture.x, currentSculpture.y, mouseX, mouseY);
-    if (d2 < 150) return true;
+    if (d2 < 100) return true;
     return false;
 }

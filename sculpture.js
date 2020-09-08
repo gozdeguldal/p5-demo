@@ -20,7 +20,7 @@ class Sculpture {
     if (this.id === currentElpsId) {
       var d2 = dist(this.x, this.y, mouseX, mouseY);
       console.log("current dist: " + d2);
-      if (d2 < 150) return true;
+      if (d2 < 100) return true;
       return false;
     }
   }
@@ -33,8 +33,8 @@ class Sculpture {
   }
 
   graduallyExpand(expandRate) {
-    if (this.ellipseWidth + expandRate >= 300) {
-      this.ellipseWidth = 300;
+    if (this.ellipseWidth + expandRate >= 200) {
+      this.ellipseWidth = 200;
       this.isExpanded = true;
     } else {
       this.ellipseWidth += expandRate;
@@ -56,11 +56,11 @@ class Sculpture {
     }
 
     if (this.isExpanded) {
-      image(this.image, this.x, this.y, 300, 300);
+      image(this.image, this.x, this.y, 200, 200);
       textSize(14);
       fill(255);
       noStroke();
-      text(this.txt, this.x + 100, this.y + 150);
+      text(this.txt, this.x + 50, this.y + 100);
     }
   }
 
