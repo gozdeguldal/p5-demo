@@ -16,16 +16,28 @@ function draw() {
 function mousePressed() {
   let isAnyOfTheExpandedSculpturesInsideClickedOn = false
   for (let i = 0; i < sculptureArray.length; i++) {
-    if(sculptureArray[i].isMouseOnTheExpandedSculpture()){
+    if(sculptureArray[i].isMouseOnTheExpandedSculpture() && sculptureArray[i].isMouseOnTheTag) {
       isAnyOfTheExpandedSculpturesInsideClickedOn = true;
     }
   }
-  if(isAnyOfTheExpandedSculpturesInsideClickedOn){
-   //buraya ne yazacaksın?
-  }
   if(!isAnyOfTheExpandedSculpturesInsideClickedOn){
     closeCurrentExpand();
+  } else {
+  //içine tıklandığında infobox çağrılsın. yani sculpture.transformForMoreInfo ()
   }
+}
+
+function closeCurrentExpand() {
+  if (currentElpsId !== null) {
+    getCurrentSculpture().resetExpand();
+    return currentElpsId = null;
+  }
+}
+
+function getCurrentSculpture(){
+  return sculptureArray.find(function(sculpture) {
+      return sculpture.id == currentElpsId;
+    });
 }
 
 function sculptureDrawer() {
@@ -41,16 +53,10 @@ function sculptureDrawer() {
   }
 }
 
-function getCurrentSculpture(){
-  return sculptureArray.find(function(sculpture) {
-      return sculpture.id == currentElpsId;
-    });
-}
-
 function drawSingleEllipse(sculpture, isCurrentEllipse) {
   if (isCurrentEllipse) {
     sculpture.graduallyExpand(expandRate);
-    sculpture.expandForMoreInfo(expandRate);
+    sculpture.transformForMoreInfo();
   } else {
     sculpture.resetExpand();
   }
@@ -61,12 +67,5 @@ function drawSingleEllipse(sculpture, isCurrentEllipse) {
 function drawEllipses(arrayOfSculptures) {
   for (let i = 0; i < arrayOfSculptures.length; i++) {
     drawSingleEllipse(arrayOfSculptures[i], false);
-  }
-}
-
-function closeCurrentExpand() {
-  if (currentElpsId !== null) {
-    getCurrentSculpture().resetExpand();
-    return currentElpsId = null;
   }
 }

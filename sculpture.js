@@ -7,7 +7,6 @@ class Sculpture {
     this.image = img;
     this.ellipseWidth = null;
     this.isExpanded = false;
-    this.isExpandedForMoreInfo = false;
   }
 
   isMouseOnTheSculpture() {
@@ -15,11 +14,16 @@ class Sculpture {
     if (d < 6) return true;
     return false;
   }
+
+  isMouseOnTheTag() {
+    if (mouseX > this.x-110 && mouseX < this.x + 110 && mouseY > this.y+110 && mouseY < this.y+160) return true;
+    return false;
+  }
   
   isMouseOnTheExpandedSculpture() {
     if (this.id === currentElpsId) {
-      var d2 = dist(this.x, this.y, mouseX, mouseY);
-      if (d2 < 100) return true;
+      var d3 = dist(this.x, this.y, mouseX, mouseY);
+      if (d3 < 100) return true;
       return false;
     }
   }
@@ -40,19 +44,14 @@ class Sculpture {
     }
   }
 
-  expandForMoreInfo(expandRate) {
-    if (this.id === currentElpsId) {
-      if (this.ellipseWidth + expandRate >= 600) {
-      this.ellipseWidth = 600;
-      this.isExpandedForMoreInfo = true;
-    } else {
-      this.ellipseWidth += expandRate;
-    }
+  transformForMoreInfo() {
+    if (this.isMouseOnTheExpandedSculpture() && mouseIsPressed) {
+    //infobox gelsin.
     }
   }
 
   showSculptureInfo() {
-    if (this.isMouseOnTheSculpture() && mouseIsPressed && currentElpsId === null) {
+    if (this.isMouseOnTheSculpture() && mouseIsPressed) {
       currentElpsId = this.id; // bu nesnenin id'sini currentElpsId global değişkenine ata
     }
     if (this.isExpanded) {
@@ -64,14 +63,10 @@ class Sculpture {
       noStroke();
       text(this.txt, this.x-100, this.y + 140);
     }
-    if (this.isExpandedForMoreInfo) {
-      rect(this.image, this.x, this.y, 600, 600);
-    }
   }
 
   resetExpand() {
     this.ellipseWidth = 10;
     this.isExpanded = false;
-    this.isExpandedForMoreInfo = false
   }
 }
