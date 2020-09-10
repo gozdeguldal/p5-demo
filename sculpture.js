@@ -1,9 +1,12 @@
 class Sculpture {
-  constructor(id, x, y, txt, img) {
+  constructor(id, x, y, name, sculptor, info, year, img) {
     this.id = id;
     this.x = x;
     this.y = y;
-    this.txt = txt;
+    this.name = name;
+    this.sculptor = sculptor;
+    this.info = info;
+    this.year = year;
     this.image = img;
     this.ellipseWidth = null;
     this.isExpanded = false;
@@ -16,6 +19,14 @@ class Sculpture {
   }
 
   isMouseOnTheTag() {
+    // console.log("mouseX: " + mouseX);
+    // console.log("mouseY: " + mouseY);
+    // console.log("this.x: " + this.x);
+    // console.log("this.y: " + this.y);
+    // console.log("this.x-110: " + (this.x-110));
+    // console.log("this.x+110: " + (this.x+110));
+    // console.log("this.y+110: " + (this.y+110));
+    // console.log("this.y+160: " + (this.y+160));
     if (mouseX > this.x-110 && mouseX < this.x + 110 && mouseY > this.y+110 && mouseY < this.y+160) return true;
     return false;
   }
@@ -61,8 +72,13 @@ class Sculpture {
       textSize(14);
       fill(0);
       noStroke();
-      text(this.txt, this.x-100, this.y + 140);
+      let info = this.getWholeInfo();
+      text(info, this.x-100, this.y + 140);
     }
+  }
+
+  getWholeInfo(){
+    return [this.name, this.sculptor, this.info, this.year].join(' | ');
   }
 
   resetExpand() {

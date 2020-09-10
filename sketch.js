@@ -1,29 +1,29 @@
 var currentElpsId = null;
 var expandRate = 25;
 
-function setup() { 
+function setup() {
+  console.log("setup() çağrıldı");
   createCanvas(1100, 500);
   ankara = loadImage("ankara_p5.jpg");
-  loadAllSculptureImages(); 
 }
 
 function draw() {
   imageMode(CENTER);
-  image(ankara, width/2, height/2);
+  image(ankara, width / 2, height / 2);
   sculptureDrawer();
 }
 
 function mousePressed() {
   let isAnyOfTheExpandedSculpturesInsideClickedOn = false
   for (let i = 0; i < sculptureArray.length; i++) {
-    if(sculptureArray[i].isMouseOnTheExpandedSculpture() && sculptureArray[i].isMouseOnTheTag) {
+    if (sculptureArray[i].isMouseOnTheExpandedSculpture() || sculptureArray[i].isMouseOnTheTag()) {
       isAnyOfTheExpandedSculpturesInsideClickedOn = true;
     }
   }
-  if(!isAnyOfTheExpandedSculpturesInsideClickedOn){
+  if (!isAnyOfTheExpandedSculpturesInsideClickedOn) {
     closeCurrentExpand();
   } else {
-  //içine tıklandığında infobox çağrılsın. yani sculpture.transformForMoreInfo ()
+    //içine tıklandığında infobox çağrılsın. yani sculpture.transformForMoreInfo ()
   }
 }
 
@@ -34,10 +34,10 @@ function closeCurrentExpand() {
   }
 }
 
-function getCurrentSculpture(){
-  return sculptureArray.find(function(sculpture) {
-      return sculpture.id == currentElpsId;
-    });
+function getCurrentSculpture() {
+  return sculptureArray.find(function (sculpture) {
+    return sculpture.id == currentElpsId;
+  });
 }
 
 function sculptureDrawer() {
@@ -45,7 +45,7 @@ function sculptureDrawer() {
     drawEllipses(sculptureArray);
   } else {
     let currentSculpture = getCurrentSculpture();
-    let tempArrayWithoutCurSclp = sculptureArray.filter(function(sculpture) {
+    let tempArrayWithoutCurSclp = sculptureArray.filter(function (sculpture) {
       return sculpture.id != currentElpsId;
     });
     drawEllipses(tempArrayWithoutCurSclp);
