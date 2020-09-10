@@ -56,7 +56,6 @@ function sculptureDrawer() {
 function drawSingleEllipse(sculpture, isCurrentEllipse) {
   if (isCurrentEllipse) {
     sculpture.graduallyExpand(expandRate);
-    sculpture.transformForMoreInfo();
   } else {
     sculpture.resetExpand();
   }

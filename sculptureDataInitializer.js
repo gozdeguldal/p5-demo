@@ -18,8 +18,8 @@ function loadAllSculptureImages() {
     sculptureArray.push(
         new Sculpture(
           id,
-          element.x,
-          element.y, 
+          parseInt(element.x),
+          parseInt(element.y), 
           element.name, 
           element.sculptor, 
           element.info, 

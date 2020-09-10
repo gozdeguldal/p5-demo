@@ -19,18 +19,15 @@ class Sculpture {
   }
 
   isMouseOnTheTag() {
-    // console.log("mouseX: " + mouseX);
-    // console.log("mouseY: " + mouseY);
-    // console.log("this.x: " + this.x);
-    // console.log("this.y: " + this.y);
-    // console.log("this.x-110: " + (this.x-110));
-    // console.log("this.x+110: " + (this.x+110));
-    // console.log("this.y+110: " + (this.y+110));
-    // console.log("this.y+160: " + (this.y+160));
-    if (mouseX > this.x-110 && mouseX < this.x + 110 && mouseY > this.y+110 && mouseY < this.y+160) return true;
-    return false;
+    if (this.id === currentElpsId) {
+      if (mouseX > this.x - 110 &&
+        mouseX < this.x + 110 &&
+        mouseY > this.y + 110 &&
+        mouseY < this.y + 160) return true;
+      return false;
+    }
   }
-  
+
   isMouseOnTheExpandedSculpture() {
     if (this.id === currentElpsId) {
       var d3 = dist(this.x, this.y, mouseX, mouseY);
@@ -55,11 +52,6 @@ class Sculpture {
     }
   }
 
-  transformForMoreInfo() {
-    if (this.isMouseOnTheExpandedSculpture() && mouseIsPressed) {
-    //infobox gelsin.
-    }
-  }
 
   showSculptureInfo() {
     if (this.isMouseOnTheSculpture() && mouseIsPressed) {
@@ -68,16 +60,25 @@ class Sculpture {
     if (this.isExpanded) {
       image(this.image, this.x, this.y, 200, 200);
       fill(255)
-      rect(this.x-110, this.y + 110,220,50);
+      rect(this.x - 110, this.y + 110, 220, 50);
       textSize(14);
       fill(0);
       noStroke();
       let info = this.getWholeInfo();
-      text(info, this.x-100, this.y + 140);
+      text(info, this.x - 100, this.y + 140);
+      if (
+        (this.isMouseOnTheExpandedSculpture() || this.isMouseOnTheTag())
+        && mouseIsPressed) {
+          // ikinci tık logic
+        console.log("ikinci TIK!");
+
+
+
+      }
     }
   }
 
-  getWholeInfo(){
+  getWholeInfo() {
     return [this.name, this.sculptor, this.info, this.year].join(' | ');
   }
 
